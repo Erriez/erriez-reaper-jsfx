@@ -9,7 +9,9 @@ This JS script for Reaper displays MIDI velocity levels with minimum and maximum
 - All Reaper versions 4 or 5.
 
 ## Installation
-- Copy this file to: ```REAPER\Effects\MIDI\midi_velocity_viewer```
+- Copy the ```midi_velocity_viewer``` JS script to: 
+  * Windows 7/8/10: ```C:\Users\<username>\AppData\Roaming\REAPER\Effects\MIDI\```
+  * Mac OS X: ```/Users/<username>/Library/Application Support/REAPER/Effects/MIDI/```
 
 ## Add FX to a track
 1. Start Reaper
@@ -25,4 +27,4 @@ This JS script for Reaper displays MIDI velocity levels with minimum and maximum
 - Right mouse click to reset
 
 ## Help
-- Please post questions on the original [Reaper forum](http://forum.cockos.com/showthread.php?t=93421) or GitHub.
+- Please post questions on the original [Reaper forum](http://forum.cockos.com/showthread.php?t=93421) or here on GitHub.
