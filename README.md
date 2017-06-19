@@ -26,5 +26,12 @@ This JS script for Reaper displays MIDI velocity levels with minimum and maximum
 - Left mouse click to hide/show the minimum/maximum velocities
 - Right mouse click to reset
 
+### Customize font
+Edit the following variables in the script to change font and font size:
+* ```custom_font``` Enable custom font 
+* ```font_type``` Font type
+* ```font_size``` Font size
+* ```font_flags``` Bold, italic and or underline
+
 ## Help
 - Please post questions on the original [Reaper forum](http://forum.cockos.com/showthread.php?t=93421) or here on GitHub.

@@ -50,6 +50,31 @@ slider3:16<1,32,1>Velocities:
 //////////////////////////////////////////////////////////////////////
 @init
 
+//////////////////////////////////////////////////////////////////////
+// Configure font type and font size
+
+//custom_font = 0;  // Default built-in font
+custom_font = 1;    // Enable custom font
+
+// Config a font type:
+font_type = "Arial";
+//font_type = "Times New Romean";
+//font_type = "Courier New";
+
+// Configure a font size:
+//font_size = 12;
+//font_size = 18;
+font_size = 20;
+//font_size = 24;
+
+// Configure font flags, for example:
+font_flags = 'b';        // Bold
+//font_flags = 'i';      // Italic
+//font_flags = 'u';      // Underline
+//font_flags = 'biu';    // Bold, italic and underline
+// Note: These flags may or may not be supported depending on the font and OS.
+
+//////////////////////////////////////////////////////////////////////
 // MIDI status defines
 statNoteOff = $x80;
 statNoteOn  = $x90;
@@ -175,6 +200,9 @@ while
 // Set draw mode
 gfx_a = 1;
 gfx_mode = 0;
+
+// Set font
+gfx_setfont(custom_font, font_type, font_size, font_flags);
     
 //Set green text colour
 gfx_r=0; gfx_g=1; gfx_b=0;
