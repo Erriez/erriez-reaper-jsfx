@@ -30,7 +30,10 @@ desc: MIDI velocity viewer.
 //////////////////////////////////////////////////////////////////////
 //                              Readme
 //
-// Copy this file to: REAPER\Effects\MIDI\midi_velocity_viewer
+// Copy this 'midi_velocity_viewer' JS script to:
+//   Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Effects\MIDI\
+//   Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Effects/MIDI/
+//
 // Click on the FX button on a (MIDI) track
 // Browse to this file: JS: MIDI\midi_velocity_viewer
 // Select the MIDI input channel 1-16 or Any
