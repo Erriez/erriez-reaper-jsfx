@@ -41,6 +41,9 @@ desc: MIDI Velocity Viewer
 // Select the number of velocities with the third slider 1-32
 // Left mouse click to hide/show the minimum/maximum velocities
 // Right mouse click to reset
+//
+// Thanks to everybody who helped me with this stuff on the forum:
+// http://forum.cockos.com/showthread.php?t=93135
 
 //////////////////////////////////////////////////////////////////////
 slider1:0<0,15,1{Any,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}>Input channel:
@@ -87,11 +90,11 @@ drawMinMax = 1;
 
 // Index in velocity and notes buffers
 index = 0;
+
 // Number of velocities and notes to draw
 numVelocities = 16;
+
 // Velocity and note buffers
-// Thanks to everybody who helped me with this stuff on the forum:
-// http://forum.cockos.com/showthread.php?t=93135
 velocities = 0;
 notes = velocities + 32;
 
