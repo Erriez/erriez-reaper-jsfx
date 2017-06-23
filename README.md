@@ -35,3 +35,7 @@ Edit the following variables in the script to change font and font size:
 
 ## Help
 - Please post questions on the original [Reaper forum](http://forum.cockos.com/showthread.php?t=93421) or here on GitHub.
+
+## Version history
+* ```1.0  Jun 2017:  Add font support```
+* ```0.1  Dec 2011:  Initial version```
