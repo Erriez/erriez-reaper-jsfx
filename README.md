@@ -39,3 +39,9 @@ Edit the following variables in the script to change font and font size:
 ## Version history
 * ```1.0  Jun 2017:  Add font support```
 * ```0.1  Dec 2011:  Initial version```
+
+
+## Donate
+Please make a donation if you think this script is useful for you. Thank you very much! :-)
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ)
