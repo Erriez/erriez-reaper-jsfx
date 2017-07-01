@@ -25,7 +25,7 @@ desc: MIDI Velocity Viewer
 
 //////////////////////////////////////////////////////////////////////
 //
-// Source: https://github.com/Erriez/reaper-midi-velocity-viewer
+// Source: https://github.com/Erriez/erriez-reaper-jsfx
 //
 //////////////////////////////////////////////////////////////////////
 //                              Readme
@@ -52,10 +52,13 @@ desc: MIDI Velocity Viewer
 //////////////////////////////////////////////////////////////////////
 //                              Donation
 //
-// Please make a donation if you think this script is useful for you. Thank you very much! :-)
+// Please consider a donation if you think this script is useful for you.
 //
 // Erriez donation link:
 // https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ
+//
+// Thank you very much! :-)
+//
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
