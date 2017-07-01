@@ -1,0 +1,873 @@
+// MIT License
+//
+// Copyright (c) 2017 Erriez
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+//////////////////////////////////////////////////////////////////////
+desc: MIDI Velocity Viewer For Drums
+
+//////////////////////////////////////////////////////////////////////
+//
+// Source: https://github.com/Erriez/erriez-reaper-jsfx
+//
+//////////////////////////////////////////////////////////////////////
+//                              Readme
+//
+// Copy this 'midi_velocity_viewer_drums.jsfx' JSFX script to:
+//   Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Effects\MIDI\
+//   Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Effects/MIDI/
+//
+// Copy the Data\ directory with presets to:
+//   Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Data\
+//   Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Data/
+//
+// Click on the FX button on a (MIDI) track
+// Browse to this file: JS: MIDI\midi_velocity_viewer_drums
+//
+// Slider1: Select the MIDI input channel 1-16 or Any
+// Slider2: Select the number of grid lines 0..10
+// Slider3: Select the number of notes per column 1..16
+// Slider4: Select a font size 10..40
+// Slider5: Select a configuration file
+//
+// Left mouse click to hide/show the minimum/maximum velocities
+// Right mouse click to reset
+//
+// Thanks to everybody who helped me with this stuff on the forum:
+// http://forum.cockos.com/showthread.php?t=93135
+//
+// Version history:
+// - 1.0  Jul 2017:  Initial version
+//
+//////////////////////////////////////////////////////////////////////
+//                              Donation
+//
+// Please consider a donation if you think this script is useful for you. Erriez donation link:
+//
+// https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ
+//
+// Thank you very much! :-)
+//
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+slider1:0<0,15,1{Any,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}>Input channel:
+slider2:5<0,10,1>Grid lines:
+slider3:4<1,16,1>Velocities per note:
+slider4:20<10,40,1>Font size:
+slider5:/midi_velocity_viewer_drums:none:Drums config file:
+
+//////////////////////////////////////////////////////////////////////
+@init
+
+//--------------------------------------------------------------------------------------------------
+// User configuration
+//--------------------------------------------------------------------------------------------------
+
+// Configure font type and font size
+
+//custom_font = 0;  // Default built-in font
+custom_font = 1;    // Enable custom font
+
+// Config a font type:
+font_type = "Arial";
+//font_type = "Times New Romean";
+//font_type = "Courier New";
+
+// Configure font flags, for example:
+font_flags = 'b';        // Bold
+//font_flags = 'i';      // Italic
+//font_flags = 'u';      // Underline
+//font_flags = 'biu';    // Bold, italic and underline
+// Note: These flags may or may not be supported depending on the font and OS.
+
+// Display note number and name:
+//   1: Display note number + note name
+//   0: Display note number only
+display_note_name = 1;
+
+// Display dyanmic range between minimum and maximum velocity
+display_dynamic_range = 0;
+
+// Debug
+debug = 0;
+
+//--------------------------------------------------------------------------------------------------
+// Constants
+//--------------------------------------------------------------------------------------------------
+
+// MIDI status defines
+STAT_NOTE_OFF = 0x80;
+STAT_NOTE_ON  = 0x90;
+
+// MIDI notes 0..127
+MAX_NUM_NOTES = 128;
+
+// Maximum number of columns
+MAX_NUM_COLUMNS = 16;
+
+// Maximum number of velocities per column
+MAX_NUM_VEL_PER_NOTE = 16;
+
+// Number of notes per octave
+NUM_NOTES_OCTAVE = 12;
+
+//--------------------------------------------------------------------------------------------------
+// Variables
+//--------------------------------------------------------------------------------------------------
+
+// Left mouse button state (LMB)
+lmb_state = 0;
+
+// Show/hide drawing min/max lines
+draw_min_max = 1;
+
+// Number of columns
+num_columns = 0;
+
+// Slider variables
+velocities_per_note = 0;
+
+//--------------------------------------------------------------------------------------------------
+// Memory allocation
+//--------------------------------------------------------------------------------------------------
+
+// Velocity array[velocities_per_note * column]
+velocities = 0;
+
+// Velocity index in the velocities array
+velocity_index = velocities + (MAX_NUM_VEL_PER_NOTE * MAX_NUM_COLUMNS);
+
+// Last note number in a column
+last_note_number = velocity_index + MAX_NUM_COLUMNS;
+
+// Conversion from note 0...127 to column number 0..15
+note_to_column = last_note_number + MAX_NUM_COLUMNS;
+
+// Note names
+note_names = note_to_column + MAX_NUM_NOTES;
+note_names[0] = "C";
+note_names[1] = "C#";
+note_names[2] = "D";
+note_names[3] = "D#";
+note_names[4] = "E";
+note_names[5] = "F";
+note_names[6] = "F#";
+note_names[7] = "G";
+note_names[8] = "G#";
+note_names[9] = "A";
+note_names[10] = "A#";
+note_names[11] = "B";
+
+// Column string names
+column_names = note_names + NUM_NOTES_OCTAVE;
+
+// Clear memory
+memset(note_to_column, -1, MAX_NUM_NOTES);
+memset(column_names, '\0', MAX_NUM_COLUMNS);
+
+function ClearVelocities()
+(
+    // Initialize velocities and notes buffers
+    (1) ? (
+        memset(velocities, -1, MAX_NUM_VEL_PER_NOTE * MAX_NUM_COLUMNS);
+    ): (
+        i = 0;
+        loop(velocities_per_note * num_columns,
+            velocities[i] = rand(127);
+            i += 1;
+        );
+    );
+
+    memset(last_note_number, -1, MAX_NUM_COLUMNS);
+
+    // Clear velocity indexes;
+    memset(velocity_index, -1, MAX_NUM_COLUMNS);
+);
+
+// Main entry point of the script
+ClearVelocities();
+
+
+//--------------------------------------------------------------------------------------------------
+// Slider changes
+//--------------------------------------------------------------------------------------------------
+@slider
+    // Slider1
+    input_channel = slider1;
+
+    // Slider2
+    num_grid_lines = slider2;
+
+    // Slider3
+    (slider3 != velocities_per_note) ? (
+        velocities_per_note = slider3;
+        ClearVelocities();
+    );
+
+    // Slider4
+    font_size = slider4;
+
+    // Slider4
+    (file_selected != slider5) ? (
+        file_selected = slider5;
+
+        handle = file_open(slider5);
+        (handle > 0) ?
+        (
+            line = #;
+            nn_name = 1; // collect note names to string slots starting from slot 1, slot 0 is always empty string
+            notename_name = #;
+            num_columns = 0;
+            memset(note_to_column, -1, MAX_NUM_NOTES);
+            cnt = 0;
+            while(
+                str_len = file_string(handle, line);
+                c = str_getchar(line, 0, 'c');
+                (c == '[') ? (
+                    // Get note name between [] characters
+                    match("[%{notename_name}s*]*", line) ? (
+                        strncpy(nn_name, notename_name, strlen(notename_name));
+                        column_names[num_columns] = nn_name;
+                        nn_name += 1;
+                        num_columns += 1;
+                    );
+                ): (num_columns >= 1) && ((c >= '0') && (c <= '9')) ? (
+                    // Get note number
+                    match("%-3d*", line, note_number);
+                    note_to_column[note_number] = num_columns-1;
+                    cnt += 1;
+                );
+                str_len > 0;
+            );
+
+            file_close(handle);
+        );
+
+        ClearVelocities();
+    );
+
+//@serialize
+
+//--------------------------------------------------------------------------------------------------
+// Process MIDI input
+//--------------------------------------------------------------------------------------------------
+@block
+while
+(
+    // Receive MIDI data
+    midirecv(offset, msg1, msg23) ?
+    (
+        // Check status byte
+        status = (msg1 & $xF0);  // High four bits is message type (240 == 11110000)
+        channel = (msg1 & $x0F); // Low four bits is channel number (15 == 00001111)
+
+        // Is it on our channel ?
+        (channel == (slider1-1)) || (slider1 == 0) ?
+        (
+            // Is it note on?
+            (status == STAT_NOTE_ON) ?
+            (
+                // Get note number
+                note_in = (msg23 & $x7F);
+
+                // Get note velocity
+                velocity_in = ((msg23/$x100) & $x7F);
+
+                // Store velocity and note in buffers
+                column = note_to_column[note_in];
+                ((column >= 0) && (column <= num_columns)) ? (
+                    // Wrap index
+                    velocity_index[column] += 1;
+                    (velocity_index[column] >= velocities_per_note) ? (
+                        velocity_index[column] = 0;
+                    );
+
+                    // Store velocity
+                    velocities[(velocities_per_note * column) + velocity_index[column]] = velocity_in;
+
+                    // Store note number
+                    last_note_number[column] = note_in;
+                );
+            );
+        );
+
+        // Send MIDI data
+        midisend(offset, msg1, msg23);
+    );
+);
+
+//--------------------------------------------------------------------------------------------------
+// Graphics functions
+//--------------------------------------------------------------------------------------------------
+@gfx 800, 350
+
+function HandleMouseEvents()
+(
+    // Capture mouse
+    (mouse_cap == 1) && (lmb_state == 0) ?
+    (
+        // Left mouse button down: Toggle min/max draw enable
+        (draw_min_max) ? draw_min_max = 0 : draw_min_max = 1;
+
+        // Execute left mouse button only once
+        lmb_state = 1;
+    ):
+
+    (mouse_cap == 0) ?
+    (
+        // Left mouse button up
+        lmb_state = 0;
+    );
+
+    (mouse_cap == 2) ?
+    (
+        // Right mouse button down: Clear velocities
+        ClearVelocities();
+    );
+);
+
+function InitializeGraphics()
+(
+    // Set draw mode
+    gfx_a = 1;
+    gfx_mode = 0;
+
+    // Set font
+    gfx_setfont(custom_font, font_type, font_size, font_flags);
+);
+
+function SetColor(r, g, b)
+(
+    gfx_r = r; gfx_g = g; gfx_b = b;
+);
+
+
+function NumberToString(number)
+(
+    // Convert a number to a tempory string
+    str = #;
+    sprintf(str, "%d", number);
+
+    // Return string
+    str;
+);
+
+function GetNoteString(note_number)
+(
+    note_octave = (note_number / NUM_NOTES_OCTAVE) - 1;
+    note_name = note_names[note_number % NUM_NOTES_OCTAVE];
+
+    str = #;
+    sprintf(str, "%d %s%d", note_number, note_name, note_octave);
+
+    // Return string;
+    str;
+);
+
+function GetStringWidth(str)
+(
+    // Get font dimensions of a string
+    gfx_measurestr(str, w, h);
+
+    // Return string width in pixels
+    w;
+);
+
+function GetStringHeight(str)
+(
+    gfx_measurestr(str, w, h);
+
+    // Return string height in pixels
+    h;
+);
+
+function GetNumberWidth(number)
+(
+    // Convert number to string and return string width
+    w = GetStringWidth(NumberToString(number));
+);
+
+function SetColorBlack()
+(
+    gfx_r = 0; gfx_g = 0; gfx_b = 0;
+);
+
+function SetColorRed()
+(
+    gfx_r = 1; gfx_g = 0; gfx_b = 0;
+);
+
+function SetColorGreen()
+(
+    gfx_r = 0; gfx_g = 1; gfx_b = 0;
+);
+
+function SetColorBlue()
+(
+    gfx_r = 0; gfx_g = 0; gfx_b = 1;
+);
+
+function SetColorYellow()
+(
+    gfx_r = 1; gfx_g = 1; gfx_b = 0;
+);
+
+function SetColorPurple()
+(
+    gfx_r = 1; gfx_g = 0; gfx_b = 1;
+);
+
+function SetColorGray()
+(
+    gfx_r = 0.5; gfx_g = 0.5; gfx_b = 0.5;
+);
+
+function SetColorWhite()
+(
+    gfx_r = 1; gfx_g = 1; gfx_b = 1;
+);
+
+function DrawText(x, y, text)
+(
+    gfx_x = x; gfx_y = y;
+    gfx_drawstr(text);
+);
+
+function DrawTextCenter(x, y, w, text)
+(
+    x = x + (w - GetStringWidth(text)) / 2;
+    DrawText(x, y, text);
+);
+
+function DrawTextRight(x, y, w, text)
+(
+    x += w - GetStringWidth(text);
+    DrawText(x, y, text);
+);
+
+function DrawNumber(x, y, number)
+(
+    gfx_x = x; gfx_y = y;
+    gfx_drawnumber(number, 0);
+);
+
+function DrawNumberCenter(x, y, w, number)
+(
+    DrawTextCenter(x, y, w, NumberToString(number));
+);
+
+function DrawNumberRight(x, y, w, number)
+(
+    str = #;
+    sprintf(str, "%d", number);
+    DrawTextRight(x, y, w, str);
+);
+
+function DrawLineH(x, y, l)
+(
+    gfx_line(x, y, x + l, y);
+);
+
+function DrawLineV(x, y, l)
+(
+    gfx_line(x, y, x, y + l);
+);
+
+function DrawDottedLine(x, y, w)
+(
+    gfx_x = x; gfx_y = y;
+    while (
+        gfx_setpixel(gfx_r, gfx_g, gfx_b);
+        gfx_x += 10;
+        gfx_x < (x + w);
+    );
+);
+
+function DrawRect(x, y, w, h)
+(
+    gfx_x = x; gfx_y = y;
+    gfx_lineto(x+w, y);
+    gfx_lineto(x+w, y+h);
+    gfx_lineto(x, y+h);
+    gfx_lineto(x, y);
+);
+
+function DrawFilledRect(x, y, w, h)
+(
+    gfx_x = x; gfx_y = y;
+    gfx_rectto(x+w, y+h);
+);
+
+function GetVelocityY(velocity)
+(
+    velocity_y = column_y + (column_h / 127) * (127 - velocity);
+);
+
+function DrawChartOutline()
+(
+    SetColorGreen();
+    DrawLineV(column_x, chart_y, chart_h);
+    DrawLineH(chart_x, column_y + column_h - 1, chart_w);
+
+    SetColorGray();
+    i = 1;
+    loop (num_columns,
+        // Draw columns
+        DrawLineV(column_x + (column_w * i), chart_y, chart_h);
+        i += 1;
+    );
+);
+
+function DrawGridLine(velocity, grid_line)
+(
+    // Calculate velocity position y
+    y = GetVelocityY(velocity) - font_size + 5;
+
+    // Draw velocity
+    SetColorGreen();
+    DrawNumberRight(chart_x, y, legenda_w - 5, velocity);
+
+    // Draw dotted velocity line
+    (grid_line) ? (
+        SetColorWhite();
+        DrawDottedLine(column_x, GetVelocityY(velocity), column_w * num_columns);
+    );
+);
+
+function DrawGridLines()
+(
+    // Draw grid line at velocity value 127
+    (num_grid_lines == 0) ? (
+        DrawGridLine(127, 0);
+    ) :(
+        DrawGridLine(127, 1);
+    );
+
+    (num_grid_lines == 2) ? (
+        DrawGridLine(64, 1);
+    ) : (num_grid_lines == 3) ? (
+        DrawGridLine(90, 1);
+        DrawGridLine(45, 1);
+    )  : (num_grid_lines == 4) ? (
+        DrawGridLine(96, 1);
+        DrawGridLine(64, 1);
+        DrawGridLine(32, 1);
+    ) : (num_grid_lines == 5) ? (
+        DrawGridLine(100, 1);
+        DrawGridLine(75, 1);
+        DrawGridLine(50, 1);
+        DrawGridLine(25, 1);
+    ) : (num_grid_lines == 6) ? (
+        DrawGridLine(110, 1);
+        DrawGridLine(88, 1);
+        DrawGridLine(66, 1);
+        DrawGridLine(44, 1);
+        DrawGridLine(22, 1);
+    ) : (num_grid_lines == 7) ? (
+        i = 1;
+        loop(6,
+            DrawGridLine((128 / 7) * i, 1);
+            i += 1;
+        );
+    )  : (num_grid_lines == 8) ? (
+        DrawGridLine(120, 1);
+        DrawGridLine(105, 1);
+        DrawGridLine(90, 1);
+        DrawGridLine(75, 1);
+        DrawGridLine(60, 1);
+        DrawGridLine(45, 1);
+        DrawGridLine(30, 1);
+        DrawGridLine(15, 1);
+    ) : (num_grid_lines == 9) ? (
+        i = 1;
+        loop(8,
+            DrawGridLine((127 / 9) * i, 1);
+            i += 1;
+        );
+    ) : (num_grid_lines == 10) ? (
+        i = 1;
+        loop(9,
+            DrawGridLine((127 / 10) * i, 1);
+            i += 1;
+        );
+    );
+
+    // Draw velocity value 0
+    DrawGridLine(0, 0);
+);
+
+function DrawLegenda()
+(
+    SetColorGreen();
+    DrawTextCenter(legenda_x, legenda_y + (font_size * 0), legenda_w, "Vel");
+    DrawTextCenter(legenda_x, legenda_y + (font_size * 1), legenda_w, "Note");
+    SetColorGray();
+    DrawTextCenter(legenda_x, legenda_y + (font_size * 2), legenda_w, "Name");
+);
+
+function GetVelocityIndex(column, i)
+(
+    // Return the velocity of a note in a column
+    ((i >= 0) && (i < velocities_per_note)) ? (
+        velocity = velocities[(velocities_per_note * column) + i];
+    ): (
+        velocity = -1;
+    );
+);
+
+function CalcMinMaxVelocity(column)
+(
+    max_velocity = -1;
+    min_velocity = 128;
+
+    i = 0;
+    loop (velocities_per_note,
+        velocity = velocities[(velocities_per_note * column) + i];
+        ((velocity >= 1) && (velocity <= 127)) ? (
+            max_velocity = max(max_velocity, velocity);
+            min_velocity = min(min_velocity, velocity);
+        );
+        i += 1;
+    );
+);
+
+function GetSpace()
+(
+    (velocities_per_note == 1) ? (
+        space = 15;
+    ) : (velocities_per_note == 2) ? (
+        space = 10;
+    ) : (velocities_per_note == 3) ? (
+        space = 8;
+    ) : (velocities_per_note == 4) ? (
+        space = 6;
+    ) : (velocities_per_note < 7) ? (
+        space = 5;
+    ) : (velocities_per_note < 10) ? (
+        space = 3;
+    ) : (
+        space = 2;
+    );
+);
+
+function DrawVelocity(column, index, velocity)
+(
+    ((velocity >= 0) && (velocity <= 127)) ? (
+        SetColorGreen();
+
+        space = GetSpace();
+
+        x = column_x + (column_w * column) + space;
+        w = ((column_w - space) / velocities_per_note) - space;
+        y = GetVelocityY(velocity);
+        h = GetVelocityY(0) - y;
+
+        x += (w + space) * index;
+
+        DrawFilledRect(x, y, w, h);
+    );
+);
+
+function DrawDynamicRange(column, min_velocity, max_velocity)
+(
+    ((min_velocity >= 1) && (max_velocity >= 1)) ? (
+        space = 5;
+
+        text_w = GetNumberWidth(max_velocity) + space;
+
+        x = column_x + (column_w * column) + space;
+        y = GetVelocityY(max_velocity);
+        h = GetVelocityY(min_velocity) - y;
+        w = column_w - (space * 2);
+
+        gfx_a = 0.3;
+        SetColorYellow();
+        DrawFilledRect(x, y, w, h);
+        gfx_a = 1;
+    );
+);
+
+function DrawMaxVelocity(column, max_velocity)
+(
+    ((max_velocity >= 1) && (max_velocity <= 127)) ? (
+        space = 3;
+
+        text_w = GetNumberWidth(max_velocity) + space;
+
+        x = column_x + (column_w * column) + space;
+        y = GetVelocityY(max_velocity);
+        w = column_w - (space * 2);
+
+        SetColorRed();
+        DrawLineH(x, y, w);
+
+        gfx_a = 0.5;
+        SetColorBlack();
+        DrawFilledRect(x, y - font_size, text_w, font_size);
+        gfx_a = 1;
+
+        SetColorRed();
+        DrawNumber(x, y - font_size, max_velocity);
+    );
+);
+
+function DrawMinVelocity(column, min_velocity)
+(
+    ((min_velocity >= 1) && (min_velocity <= 127)) ? (
+        space = 3;
+
+        text_w = GetNumberWidth(min_velocity);
+
+        x = column_x + (column_w * column) + space;
+        y = GetVelocityY(min_velocity);
+        w = column_w - (space * 2);
+
+        SetColorYellow();
+        DrawLineH(x, y, w);
+
+        x = column_x + (column_w * (column + 1)) - text_w - space;
+
+        gfx_a = 0.5;
+        SetColorBlack();
+        DrawFilledRect(x, y - font_size, text_w, font_size);
+        gfx_a = 1;
+
+        SetColorYellow();
+        DrawNumber(x, y - font_size, min_velocity);
+    );
+);
+
+function DrawColumn(column)
+(
+    // Draw velocities
+    i = 0;
+    loop (velocities_per_note,
+        DrawVelocity(column, i, GetVelocityIndex(column, i));
+        i += 1;
+    );
+
+    // Get last velocity
+    last_velocity = GetVelocityIndex(column, velocity_index[column]);
+
+    (draw_min_max) ? (
+        // Calculate minimum and maximum velocity
+        CalcMinMaxVelocity(column);
+
+        (velocities_per_note >= 2) ? (
+            // Draw dynamic range
+            (display_dynamic_range) ? (
+                DrawDynamicRange(column, min_velocity, max_velocity);
+            );
+
+            // Draw max velocity
+            DrawMaxVelocity(column, max_velocity);
+
+            // Draw min velocity
+            (max_velocity != min_velocity) ? (
+                DrawMinVelocity(column, min_velocity);
+            );
+        );
+    );
+
+    // Position labels
+    SetColorGreen();
+    labels_x = column_x + (column_w * column);
+    labels_y = legenda_y;
+
+    // Draw velocity centered
+    SetColorGreen();
+    ((last_velocity >= 1) && (last_velocity <= 127)) ? (
+        DrawNumberCenter(labels_x, labels_y, column_w, last_velocity);
+    ) : (
+        DrawTextCenter(labels_x, labels_y, column_w, "-");
+    );
+
+    // Draw last note number centered
+    note_number = last_note_number[column];
+    ((note_number >= 1) && (note_number <= 127)) ? (
+        (display_note_name) ? (
+            note_name = GetNoteString(note_number);
+            DrawTextCenter(labels_x, labels_y + font_size, column_w, note_name);
+        ): (
+            DrawNumberCenter(labels_x, labels_y + font_size, column_w, note_number);
+        );
+    ) : (
+        DrawTextCenter(labels_x, labels_y + font_size, column_w, "-");
+    );
+
+    // Draw note name centered
+    SetColorGray();
+    DrawTextCenter(labels_x, labels_y + (font_size * 2), column_w, column_names[column]);
+);
+
+function DrawColumns()
+(
+    column = 0;
+    loop (num_columns,
+        DrawColumn(column);
+        column += 1;
+    );
+);
+
+//--------------------------------------------------------------------------------------------------
+// Process graphics entry point: Tick every 1/25 sec
+//--------------------------------------------------------------------------------------------------
+(debug) ? (
+    start_time = time_precise();
+);
+
+HandleMouseEvents();
+InitializeGraphics();
+
+chart_x = 0;
+chart_y = 0;
+chart_w = gfx_w - 0;
+chart_h = gfx_h - 0;
+
+num_labels = 3;
+legenda_w = column_x - chart_x;
+legenda_h = font_size * num_labels;
+legenda_x = chart_x;
+legenda_y = chart_y + chart_h - legenda_h;
+
+column_x = chart_x + GetStringWidth("Name:") + 10;
+column_y = chart_y + font_size;
+column_w = (chart_x + chart_w - column_x) / num_columns;
+column_h = legenda_y - column_y - 3;
+
+(debug) ? (
+    // Debug areas
+    SetColor(1,0,0);
+    DrawRect(chart_x, chart_y, chart_w, chart_h);
+    DrawFilledRect(column_x, column_y, column_w, column_h);
+    DrawFilledRect(legenda_x, legenda_y, legenda_w, legenda_h);
+);
+
+DrawChartOutline();
+DrawLegenda();
+DrawColumns();
+DrawGridLines();
+
+(debug) ? (
+    end_time = time_precise();
+    DrawNumber(0,0,((end_time-start_time)*1000000));
+    DrawText(40,0,"us");
+);

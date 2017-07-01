@@ -30,15 +30,17 @@ desc: MIDI Velocity Viewer
 //////////////////////////////////////////////////////////////////////
 //                              Readme
 //
-// Copy this 'midi_velocity_viewer' JS script to:
+// Copy this 'midi_velocity_viewer' JSFX script to:
 //   Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Effects\MIDI\
 //   Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Effects/MIDI/
 //
 // Click on the FX button on a (MIDI) track
 // Browse to this file: JS: MIDI\midi_velocity_viewer
+//
 // Select the MIDI input channel 1-16 or Any
 // Select the MIDI input note 0-127 or Any
 // Select the number of velocities with the third slider 1-32
+//
 // Left mouse click to hide/show the minimum/maximum velocities
 // Right mouse click to reset
 //
@@ -52,9 +54,8 @@ desc: MIDI Velocity Viewer
 //////////////////////////////////////////////////////////////////////
 //                              Donation
 //
-// Please consider a donation if you think this script is useful for you.
+// Please consider a donation if you think this script is useful for you. Erriez donation link:
 //
-// Erriez donation link:
 // https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ
 //
 // Thank you very much! :-)
@@ -95,8 +96,8 @@ font_flags = 'b';        // Bold
 
 //////////////////////////////////////////////////////////////////////
 // MIDI status defines
-statNoteOff = $x80;
-statNoteOn  = $x90;
+statNoteOff = 0x80;
+statNoteOn  = 0x90;
 
 // Left mouse button state (LMB)
 lmbState = 0;
