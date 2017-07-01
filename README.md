@@ -5,8 +5,8 @@ This JS script for Reaper displays MIDI velocity levels with minimum and maximum
 ## Screenshot
 ![Screenshot](https://github.com/Erriez/reaper-midi-velocity-viewer/blob/master/screenshots/midi_velocity_viewer_01.png?raw=true)
 
-## Prerequisites
-- All Reaper versions 4.59+ and 5.0+.
+## Requirements
+- All Reaper versions 4.60+ and 5.0+.
 
 ## Installation
 - Copy the ```midi_velocity_viewer``` JS script to: 
