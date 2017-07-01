@@ -8,6 +8,10 @@ This repository contains Erriez open source JSFX scripts for Reaper.
 
 A MIDI velocity viewer tool especially designed for drums and percussion.
 
+## Screenshot
+
+![Screenshot](https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_drums_gm_01.png)
+
 ## Features
 
 * Display note velocities in real time.
@@ -19,16 +23,16 @@ A MIDI velocity viewer tool especially designed for drums and percussion.
 * Configurable number of velocities per column.
 * Configurable font size.
 
-## Screenshot
-
-![Screenshot](https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_drums_gm_01.png)
-
 ---
 
 ## MIDI velocity viewer
 
 A generic MIDI velocity viewer to display MIDI note velocites in real time. Useful for all 
 instrument types.
+
+## Screenshot
+
+![Screenshot](https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_01.png)
 
 ## Features
 * Display MIDI note velocities in real time.
@@ -37,10 +41,6 @@ instrument types.
 * Display one or all MIDI channels.
 * Configurable number of input notes.
 * Configurable number of velocities.
-
-## Screenshot
-
-![Screenshot](https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_01.png)
 
 ---
 
