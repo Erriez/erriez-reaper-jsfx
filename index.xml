@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="Erriez Scripts" commit="7439e5c8b1ac4a86e0a7aa3b1cf68b6ba6ee7d4d">
+<index version="1" name="Erriez Scripts" commit="7f5e03ef4d013520ee620294e483777f13168582">
   <category name="Effects/midi_velocity_viewer">
     <reapack name="midi_velocity_viewer.jsfx" type="effect" desc="MIDI Velocity Viewer">
       <metadata>
