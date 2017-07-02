@@ -1,18 +1,15 @@
-// General MIDI drum map file for MIDI drum velocity viewer
+// General MIDI extended drum map preset file (MIDI Velocity Viewer for drums).
 
-// Kick
 [KD]
 35 Acoustic Bass Drum
 36  Bass Drum 1
 
-// Snare
 [SD]
 37 Side Stick
 38  Acoustic Snare
 39  Hand Clap
 40  Electric Snare
 
-// Toms
 [FT2]
 41  Low Floor Tom
 [FT1]
@@ -26,32 +23,26 @@
 [RT1]
 50  High Tom
 
-// Hi-hat
 [HH]
 42  Closed Hi-Hat
 //44 Pedal Hi-Hat
 46  Open Hi-Hat
 
-// Crashes
 [CR]
 49  Crash Cymbal 1
 57  Crash Cymbal 2
 
-// Rides
 [RD]
 51  Ride Cymbal 1
 53  Ride Bell
 59  Ride Cymbal 2
 
-China
 [CH]
 52  Chinese Cymbal
 
-// Splash
 [SP]
 55  Splash Cymbal
 
-// Percussion
 [PE]
 54  Tambourine
 56  Cowbell

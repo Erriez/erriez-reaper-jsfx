@@ -1,4 +1,4 @@
-// General MIDI drum map file for MIDI drum velocity viewer
+// General MIDI drum map preset file (MIDI Velocity Viewer for drums).
 
 [Kick]
 35	Acoustic Bass Drum
