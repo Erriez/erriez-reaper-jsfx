@@ -1,3 +1,43 @@
+desc: MIDI Velocity Viewer for Drums and Percussion
+version: 1.0
+author: Erriez
+license: MIT
+links:
+    Github: https://github.com/Erriez/erriez-reaper-jsfx
+    Forum:  http://forum.cockos.com/showthread.php?t=93135
+donation:   https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ
+screenshot: https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_01.png
+changelog:
+    - 1.0  01 Jul 2017:  Initial version.
+about:
+    MIDI Velocity Viewer for Drums and Percussion
+
+    Copy this 'midi_velocity_viewer_drums.jsfx' JSFX script to:
+        Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Effects\MIDI\
+        Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Effects/MIDI/
+
+    Copy the Data\ directory with presets to:
+        Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Data\
+        Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Data/
+
+    Click on the FX button on a (MIDI) track
+    Browse to this file: JS: MIDI\midi_velocity_viewer_drums
+
+    Slider1: Select the MIDI input channel 1-16 or Any
+    Slider2: Select the number of grid lines 0..10
+    Slider3: Select the number of notes per column 1..16
+    Slider4: Select a font size 10..40
+    Slider5: Select a configuration file
+
+    Left mouse click to hide/show the minimum/maximum velocities
+    Right mouse click to reset
+    
+    Please consider a donation when these scripts are useful for you and want to 
+    support the developer. Donation makes it possible to develop new features.
+
+    Thank you very much! :-)
+
+//------------------------------------------------------------------------------
 // MIT License
 //
 // Copyright (c) 2017 Erriez
@@ -19,67 +59,20 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+//------------------------------------------------------------------------------
 
-//////////////////////////////////////////////////////////////////////
-desc: MIDI Velocity Viewer For Drums
-
-//////////////////////////////////////////////////////////////////////
-//
-// Source: https://github.com/Erriez/erriez-reaper-jsfx
-//
-//////////////////////////////////////////////////////////////////////
-//                              Readme
-//
-// Copy this 'midi_velocity_viewer_drums.jsfx' JSFX script to:
-//   Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Effects\MIDI\
-//   Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Effects/MIDI/
-//
-// Copy the Data\ directory with presets to:
-//   Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Data\
-//   Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Data/
-//
-// Click on the FX button on a (MIDI) track
-// Browse to this file: JS: MIDI\midi_velocity_viewer_drums
-//
-// Slider1: Select the MIDI input channel 1-16 or Any
-// Slider2: Select the number of grid lines 0..10
-// Slider3: Select the number of notes per column 1..16
-// Slider4: Select a font size 10..40
-// Slider5: Select a configuration file
-//
-// Left mouse click to hide/show the minimum/maximum velocities
-// Right mouse click to reset
-//
-// Thanks to everybody who helped me with this stuff on the forum:
-// http://forum.cockos.com/showthread.php?t=93135
-//
-// Version history:
-// - 1.0  Jul 2017:  Initial version
-//
-//////////////////////////////////////////////////////////////////////
-//                              Donation
-//
-// Please consider a donation if you think this script is useful for you. Erriez donation link:
-//
-// https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ
-//
-// Thank you very much! :-)
-//
-//////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////
 slider1:0<0,15,1{Any,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}>Input channel:
 slider2:5<0,10,1>Grid lines:
 slider3:4<1,16,1>Velocities per note:
 slider4:20<10,40,1>Font size:
 slider5:/midi_velocity_viewer_drums:none:Drums config file:
 
-//////////////////////////////////////////////////////////////////////
+//------------------------------------------------------------------------------
 @init
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // User configuration
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 // Configure font type and font size
 
@@ -109,9 +102,9 @@ display_dynamic_range = 0;
 // Debug
 debug = 0;
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Constants
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 // MIDI status defines
 STAT_NOTE_OFF = 0x80;
@@ -129,9 +122,9 @@ MAX_NUM_VEL_PER_NOTE = 16;
 // Number of notes per octave
 NUM_NOTES_OCTAVE = 12;
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Variables
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 // Left mouse button state (LMB)
 lmb_state = 0;
@@ -145,9 +138,9 @@ num_columns = 0;
 // Slider variables
 velocities_per_note = 0;
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Memory allocation
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 // Velocity array[velocities_per_note * column]
 velocities = 0;
@@ -206,9 +199,9 @@ function ClearVelocities()
 ClearVelocities();
 
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Slider changes
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 @slider
     // Slider1
     input_channel = slider1;
@@ -233,7 +226,9 @@ ClearVelocities();
         (handle > 0) ?
         (
             line = #;
-            nn_name = 1; // collect note names to string slots starting from slot 1, slot 0 is always empty string
+            // Collect note names to string slots starting from slot 1, slot 0 
+            // is always empty string
+            nn_name = 1;
             notename_name = #;
             num_columns = 0;
             memset(note_to_column, -1, MAX_NUM_NOTES);
@@ -266,9 +261,9 @@ ClearVelocities();
 
 //@serialize
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Process MIDI input
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 @block
 while
 (
@@ -314,9 +309,9 @@ while
     );
 );
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Graphics functions
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 @gfx 800, 350
 
 function HandleMouseEvents()
@@ -827,9 +822,9 @@ function DrawColumns()
     );
 );
 
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Process graphics entry point: Tick every 1/25 sec
-//--------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 (debug) ? (
     start_time = time_precise();
 );
