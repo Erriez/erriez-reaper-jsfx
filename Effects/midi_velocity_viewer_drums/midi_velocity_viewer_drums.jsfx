@@ -7,7 +7,7 @@ links:
     Forum:  http://forum.cockos.com/showthread.php?t=93135
 donation:   https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ
 screenshot: https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_01.png
-provides:   [data] midi_velocity_viewer_drums/GM Basic.txt > midi_velocity_viewer_drums/GM Basic.txt
+provides:   [data] midi_velocity_viewer_drums/*.txt
 changelog:
     - 1.0  01 Jul 2017:  Initial version.
 about:
