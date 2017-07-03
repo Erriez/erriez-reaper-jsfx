@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" name="Erriez Scripts" commit="7f5e03ef4d013520ee620294e483777f13168582">
+<index version="1" name="Erriez Scripts" commit="27f8b92231a64f651a11ac4910129add5ed0314f">
   <category name="Effects/midi_velocity_viewer">
     <reapack name="midi_velocity_viewer.jsfx" type="effect" desc="MIDI Velocity Viewer">
       <metadata>
@@ -52,7 +52,9 @@
       </metadata>
       <version name="1.0" author="Erriez" time="2017-07-02T14:33:40Z">
         <changelog><![CDATA[- 1.0  01 Jul 2017:  Initial version.]]></changelog>
-        <source>https://github.com/Erriez/erriez-reaper-jsfx/raw/5b868e1832e97e2f18e72a192b49a88765e995dc/Effects/midi_velocity_viewer_drums/midi_velocity_viewer_drums.jsfx</source>
+        <source>https://github.com/Erriez/reaper-midi-velocity-viewer/raw/27f8b92231a64f651a11ac4910129add5ed0314f/Effects/midi_velocity_viewer_drums/midi_velocity_viewer_drums.jsfx</source>
+        <source type="data" file="midi_velocity_viewer_drums/GM Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/27f8b92231a64f651a11ac4910129add5ed0314f/Effects/midi_velocity_viewer_drums/midi_velocity_viewer_drums/GM%20Basic.txt</source>
+        <source type="data" file="midi_velocity_viewer_drums/GM Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/27f8b92231a64f651a11ac4910129add5ed0314f/Effects/midi_velocity_viewer_drums/midi_velocity_viewer_drums/GM%20Extended.txt</source>
       </version>
     </reapack>
   </category>
