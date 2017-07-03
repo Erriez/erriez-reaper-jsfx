@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" commit="b760f0994f5cec9b0c7eac71ec23d63b4ebbf392">
+<index version="1" commit="e13b4ffd85e30848e2725f5dba524182c36bb1f9" name="Erriez JSFX">
   <category name="MIDI/midi_velocity_viewer">
     <reapack name="midi_velocity_viewer.jsfx" type="effect" desc="MIDI Velocity Viewer">
       <metadata>
@@ -7,11 +7,35 @@
 {\colortbl;\red255\green0\blue0;\red0\green0\blue255;}
 \widowctrl\hyphauto
 
-{\pard \ql \f0 \sa180 \li0 \fi0 MIDI Velocity Viewer\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 Copy this 'midi_velocity_viewer' JSFX script to: Windows 7/8/10: C:\\Users<username>\\AppData\\Roaming\\REAPER\\Effects\\MIDI\line Mac OS X: /Users//Library/Application Support/REAPER/Effects/MIDI/\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 Click on the FX button on a (MIDI) track Browse to this file: JS: MIDI\\midi_velocity_viewer\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 Select the MIDI input channel 1-16 or Any Select the MIDI input note 0-127 or Any Select the number of velocities with the third slider 1-32\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 Left mouse click to hide/show the minimum/maximum velocities Right mouse click to reset\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 MIDI Velocity Viewer\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This JSFX script for Reaper displays in real time MIDI velocities for all instrument types.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Features\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Display MIDI note velocities in real time.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Display minimum and maximum note velocities.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Display last captured note number and note name.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Display one or all MIDI channels.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Configurable number of input notes.\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Configurable number of velocities.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Requirements\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab REAPER v4.60+ or REAPER v5.0+.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Files and directories Windows 7/8/10\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 C:\\Users\\<username>\\AppData\\Roaming\\}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 REAPER\\Effects\\MIDI\\midi_velocity_viewer.jsfx}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Files and directories Mac OS X\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 {\f1 /Users/<username>/Library/Application Support/}\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 REAPER/Effects/MIDI/midi_velocity_viewer.jsfx}\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Usage\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Select the MIDI input channel 1-16 or Any\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Select the MIDI input note 0-127 or Any\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Select the number of velocities with the third slider 1-32\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Left mouse click to hide/show the minimum/maximum velocities\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Right mouse click to reset\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Customize font\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Edit the following variables in the script to change font and font size:\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 custom_font} Enable custom font\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 font_type} Font type\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 font_flags} Bold, italic and or underline\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Donate\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Please consider a donation when these scripts are useful for you and want to support the developer. Donation makes it possible to develop new features.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Thank you very much! :-)\par}
 }
@@ -67,6 +91,7 @@
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Left mouse click to hide/show the minimum/maximum velocities\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Right mouse click to reset\sa180\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Create custom note mapping\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 TODO\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Customize font\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Edit the following variables in the script to change font and font size:\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 custom_font} Enable custom font\par}
