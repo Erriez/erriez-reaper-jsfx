@@ -32,8 +32,8 @@ about:
 
     Left mouse click to hide/show the minimum/maximum velocities
     Right mouse click to reset
-    
-    Please consider a donation when these scripts are useful for you and want to 
+
+    Please consider a donation when these scripts are useful for you and want to
     support the developer. Donation makes it possible to develop new features.
 
     Thank you very much! :-)
@@ -98,7 +98,7 @@ font_flags = 'b';        // Bold
 display_note_name = 1;
 
 // Display dyanmic range between minimum and maximum velocity
-display_dynamic_range = 0;
+display_dynamic_range = 1;
 
 // Debug
 debug = 0;
@@ -227,7 +227,7 @@ ClearVelocities();
         (handle > 0) ?
         (
             line = #;
-            // Collect note names to string slots starting from slot 1, slot 0 
+            // Collect note names to string slots starting from slot 1, slot 0
             // is always empty string
             nn_name = 1;
             notename_name = #;
@@ -694,8 +694,8 @@ function DrawDynamicRange(column, min_velocity, max_velocity)
         h = GetVelocityY(min_velocity) - y;
         w = column_w - (space * 2);
 
-        gfx_a = 0.3;
-        SetColorYellow();
+        gfx_a = 0.2;
+        SetColorWhite();
         DrawFilledRect(x, y, w, h);
         gfx_a = 1;
     );
@@ -753,6 +753,19 @@ function DrawMinVelocity(column, min_velocity)
 
 function DrawColumn(column)
 (
+    // Calculate minimum and maximum velocity
+    CalcMinMaxVelocity(column);
+      
+    // Get last velocity
+    last_velocity = GetVelocityIndex(column, velocity_index[column]);
+              
+    // Draw dynamic range
+    (draw_min_max) ? (
+        (display_dynamic_range) ? (
+            DrawDynamicRange(column, min_velocity, max_velocity);
+        );
+    );
+            
     // Draw velocities
     i = 0;
     loop (velocities_per_note,
@@ -760,19 +773,8 @@ function DrawColumn(column)
         i += 1;
     );
 
-    // Get last velocity
-    last_velocity = GetVelocityIndex(column, velocity_index[column]);
-
     (draw_min_max) ? (
-        // Calculate minimum and maximum velocity
-        CalcMinMaxVelocity(column);
-
         (velocities_per_note >= 2) ? (
-            // Draw dynamic range
-            (display_dynamic_range) ? (
-                DrawDynamicRange(column, min_velocity, max_velocity);
-            );
-
             // Draw max velocity
             DrawMaxVelocity(column, max_velocity);
 
