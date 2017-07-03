@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" commit="e13b4ffd85e30848e2725f5dba524182c36bb1f9" name="Erriez JSFX">
+<index version="1" commit="79bd46628c0d9c44b8724a4248a2ab41a152b1c6" name="Erriez JSFX">
   <category name="MIDI/midi_velocity_viewer">
     <reapack name="midi_velocity_viewer.jsfx" type="effect" desc="MIDI Velocity Viewer">
       <metadata>
@@ -41,7 +41,7 @@
 }
 ]]></description>
         <link rel="website" href="https://github.com/Erriez/erriez-reaper-jsfx">Github:</link>
-        <link rel="website" href="http://forum.cockos.com/showthread.php?t=93135">Forum:</link>
+        <link rel="website" href="http://forum.cockos.com/showthread.php?t=93421">Forum:</link>
         <link rel="screenshot">https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_01.png</link>
         <link rel="donation">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=FUPLMV8JNMJTQ</link>
       </metadata>
@@ -103,7 +103,7 @@
 }
 ]]></description>
         <link rel="website" href="https://github.com/Erriez/erriez-reaper-jsfx">Github:</link>
-        <link rel="website" href="http://forum.cockos.com/showthread.php?t=93135">Forum:</link>
+        <link rel="website" href="http://forum.cockos.com/showthread.php?t=93421">Forum:</link>
         <link rel="screenshot">https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_drums_gm_01.png</link>
         <link rel="donation">https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=FUPLMV8JNMJTQ</link>
       </metadata>
