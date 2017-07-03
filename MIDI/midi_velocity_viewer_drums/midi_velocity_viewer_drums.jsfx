@@ -11,28 +11,56 @@ provides:   [data] midi_velocity_viewer_drums/*.txt
 changelog:
     - 1.0  01 Jul 2017:  Initial version.
 about:
-    MIDI Velocity Viewer for Drums and Percussion
+    # MIDI Velocity Viewer for Drums and Percussion
+    This JS script for Reaper displays in real time MIDI velocities for drums
+    and percussion.
 
-    Copy this 'midi_velocity_viewer_drums.jsfx' JSFX script to:
-        Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Effects\MIDI\
-        Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Effects/MIDI/
+    ## Features
+    * Display note velocities in real time.
+    * Use custom or pre-defined drum-map presets.
+    * Display minimum and maximum note velocities.
+    * Display last captured note number and note name.
+    * Display one or all MIDI channels.
+    * Configurable number of grid lines.
+    * Configurable number of velocities per column.
+    * Configurable font size.
 
-    Copy the Data\ directory with presets to:
-        Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Data\
-        Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Data/
+    ## Requirements
+    * REAPER v4.60+ or REAPER v5.0+.
 
-    Click on the FX button on a (MIDI) track
-    Browse to this file: JS: MIDI\midi_velocity_viewer_drums
+    ## Files and directories Windows 7/8/10
+    `C:\Users\<username>\AppData\Roaming\`
+    * `REAPER\Effects\MIDI\midi_velocity_viewer_drums.jsfx`
+    * `REAPER\Data\midi_velocity_viewer_drums\*.txt`
 
-    Slider1: Select the MIDI input channel 1-16 or Any
-    Slider2: Select the number of grid lines 0..10
-    Slider3: Select the number of notes per column 1..16
-    Slider4: Select a font size 10..40
-    Slider5: Select a configuration file
+    ## Files and directories Mac OS X
+    `/Users/<username>/Library/Application Support/`
+    * `REAPER/Effects/MIDI/midi_velocity_viewer_drums.jsfx`
+    * `REAPER/Data/midi_velocity_viewer_drums/*.txt`
 
-    Left mouse click to hide/show the minimum/maximum velocities
-    Right mouse click to reset
+    ## Usage
+    1. Click on the FX button on a (MIDI) track
+    2. Browse to this file: `JS: MIDI\midi_velocity_viewer_drums`
 
+    * `Slider1`: Select the MIDI input channel 1-16 or Any
+    * `Slider2`: Select the number of grid lines 0..10
+    * `Slider3`: Select the number of notes per column 1..16
+    * `Slider4`: Select a font size 10..40
+    * `Slider5`: Select a configuration file
+
+    - Left mouse click to hide/show the minimum/maximum velocities
+    - Right mouse click to reset
+
+    ## Create custom note mapping
+
+
+    ## Customize font
+    Edit the following variables in the script to change font and font size:
+    * `custom_font` Enable custom font
+    * `font_type` Font type
+    * `font_flags` Bold, italic and or underline
+
+    ## Donate
     Please consider a donation when these scripts are useful for you and want to
     support the developer. Donation makes it possible to develop new features.
 
