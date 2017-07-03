@@ -1,7 +1,7 @@
-desc: MIDI Velocity Viewer
-version: 1.0
-author: Erriez
-license: MIT
+desc:       MIDI Velocity Viewer
+version:    1.0
+author:     Erriez
+license:    MIT
 links:
     Github: https://github.com/Erriez/erriez-reaper-jsfx
     Forum:  http://forum.cockos.com/showthread.php?t=93135
@@ -11,23 +11,45 @@ changelog:
     - 1.0  Jun 2017:  Add font support
     -      Dec 2011:  Initial version
 about:
-    MIDI Velocity Viewer
-    
-    Copy this 'midi_velocity_viewer' JSFX script to:
-    Windows 7/8/10: C:\Users\<username>\AppData\Roaming\REAPER\Effects\MIDI\
-    Mac OS X:       /Users/<username>/Library/Application Support/REAPER/Effects/MIDI/
+    # MIDI Velocity Viewer
+    This JSFX script for Reaper displays in real time MIDI velocities for all
+    instrument types.
 
-    Click on the FX button on a (MIDI) track
-    Browse to this file: JS: MIDI\midi_velocity_viewer
+    ## Features
+    * Display MIDI note velocities in real time.
+    * Display minimum and maximum note velocities.
+    * Display last captured note number and note name.
+    * Display one or all MIDI channels.
+    * Configurable number of input notes.
+    * Configurable number of velocities.
 
-    Select the MIDI input channel 1-16 or Any
-    Select the MIDI input note 0-127 or Any
-    Select the number of velocities with the third slider 1-32
+    ## Requirements
+    * REAPER v4.60+ or REAPER v5.0+.
 
-    Left mouse click to hide/show the minimum/maximum velocities
-    Right mouse click to reset
-    
-    Please consider a donation when these scripts are useful for you and want to 
+    ## Files and directories Windows 7/8/10
+    `C:\Users\<username>\AppData\Roaming\`
+    * `REAPER\Effects\MIDI\midi_velocity_viewer.jsfx`
+
+    ## Files and directories Mac OS X
+    `/Users/<username>/Library/Application Support/`
+    * `REAPER/Effects/MIDI/midi_velocity_viewer.jsfx`
+
+    ## Usage
+    * Select the MIDI input channel 1-16 or Any
+    * Select the MIDI input note 0-127 or Any
+    * Select the number of velocities with the third slider 1-32
+
+    - Left mouse click to hide/show the minimum/maximum velocities
+    - Right mouse click to reset
+
+    ## Customize font
+    Edit the following variables in the script to change font and font size:
+    * `custom_font` Enable custom font
+    * `font_type` Font type
+    * `font_flags` Bold, italic and or underline
+
+    ## Donate
+    Please consider a donation when these scripts are useful for you and want to
     support the developer. Donation makes it possible to develop new features.
 
     Thank you very much! :-)
