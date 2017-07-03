@@ -1,0 +1,36 @@
+// Roland TD12 basic configuration file (midi_velocity_viewer_drums.jsfx).
+
+[Kick]
+35  Rim
+36  Head
+
+[Snare]
+23  Brush
+37  X-Stick
+38  Head 
+40  Rim
+
+[HH]
+46  Open bow
+42  Closed bow
+26  Open edge
+22  Closed edge
+
+[Toms]
+48  Head
+50  Rim
+45  Head
+47  Rim
+43  Head
+58  Rim
+
+[Crash]
+49  Head crash 1
+55  Rim crash 1
+57  Head crash 2
+52  Rim crash 2
+
+[Ride]
+51  Head
+53  Rim
+59  Rim edge

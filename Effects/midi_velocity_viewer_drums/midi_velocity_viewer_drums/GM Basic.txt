@@ -1,4 +1,4 @@
-// General MIDI drum map preset file (MIDI Velocity Viewer for drums).
+// General MIDI drum map preset file (midi_velocity_viewer_drums.jsfx).
 
 [Kick]
 35	Acoustic Bass Drum
