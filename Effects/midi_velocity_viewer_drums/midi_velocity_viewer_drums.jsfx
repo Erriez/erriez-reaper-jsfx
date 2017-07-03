@@ -68,6 +68,11 @@ slider3:4<1,16,1>Velocities per note:
 slider4:20<10,40,1>Font size:
 slider5:/midi_velocity_viewer_drums:none:Drums config file:
 
+// This REAPER JSFX has no audio inputs and/or outputs, which enables some
+// processing optimizations.
+in_pin:none
+out_pin:none
+
 //------------------------------------------------------------------------------
 @init
 
@@ -755,17 +760,17 @@ function DrawColumn(column)
 (
     // Calculate minimum and maximum velocity
     CalcMinMaxVelocity(column);
-      
+
     // Get last velocity
     last_velocity = GetVelocityIndex(column, velocity_index[column]);
-              
+
     // Draw dynamic range
     (draw_min_max) ? (
         (display_dynamic_range) ? (
             DrawDynamicRange(column, min_velocity, max_velocity);
         );
     );
-            
+
     // Draw velocities
     i = 0;
     loop (velocities_per_note,
