@@ -7,7 +7,7 @@ links:
     Forum:  http://forum.cockos.com/showthread.php?t=93421
 donation:   https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ
 screenshot: https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_drums_gm_01.png
-provides:   [data] midi_velocity_viewer_drums/*.txt
+provides:   [data] erriez_midi_velocity_viewer_drums/*.txt
 changelog:
     - 1.0  01 Jul 2017:  Initial version.
 about:
@@ -94,7 +94,7 @@ slider1:0<0,15,1{Any,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}>Input channel:
 slider2:5<0,10,1>Grid lines:
 slider3:4<1,16,1>Velocities per note:
 slider4:20<10,40,1>Font size:
-slider5:/midi_velocity_viewer_drums:none:Drums config file:
+slider5:/erriez_midi_velocity_viewer_drums:none:Drums config file:
 
 // This REAPER JSFX has no audio inputs and/or outputs, which enables some
 // processing optimizations.
