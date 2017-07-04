@@ -1,0 +1,64 @@
+// Toontrack EZDrummer2 extended configuration file (midi_velocity_viewer_drums.jsfx).
+
+[Kick]
+36	Kick
+
+[Snare]
+37	Sidestick
+38	Snare
+40	Rimshot
+
+[HH]
+22	Closed Edge
+24	Hats Open 1
+25	Hats Open 2
+26	Hats Open 3
+42	Hats Closed
+46	Hats Open
+60	Hats Open Max
+61	Hats Closed Tip
+62	Hats Tight Edge
+63	Hats Tight Tip
+65	Hats Seq Hits
+
+[T1]
+48	Racktom 1
+82	Racktom 1 Rimshot
+
+[T2]
+47	Racktom 2
+80	Racktom 2 Rimshot
+
+[T3]
+45	Racktom 3
+78	Racktom 3 Rimshot
+
+[FT1]
+43	Floortom 1
+75	Floortom 1 Rimshot
+
+[FT2]
+41	Floortom 2
+73	Floortom 2 Rimshot
+
+[Ride]
+51	Ride Bow
+53	Ride Bell
+59	Ride Edge
+83	Ride Muted
+
+[Sym1]
+55	Cymbal 1 Crashed
+56	Cymbal 1 Muted
+
+[Sym2]
+49	Cymbal 2 Crashed
+50	Cymbal 2 Muted
+
+[Sym3]
+57	Cymbal 3 Crashed
+58	Cymbal 3 Muted
+
+[Sym4]
+52	Cymbal 4 Crashed
+54	Cymbal 4 Muted

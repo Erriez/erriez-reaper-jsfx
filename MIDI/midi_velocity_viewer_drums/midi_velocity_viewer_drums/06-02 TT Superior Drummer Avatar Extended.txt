@@ -1,0 +1,160 @@
+// Toontrack Superior Drummer extended configuration file (midi_velocity_viewer_drums.jsfx).
+
+[Kick]
+34 [Kick] Alias
+35 [Kick] Alias
+36 [Kick] Right
+
+[Snare]
+06 [Snare] Trig
+33 [Snare] Edge
+37 [Snare] Sidestick
+38 [Snare] Center
+39 [Snare] Ruffs
+40 [Snare] Rimshot
+66 [Snare] Left Muted
+67 [Snare] Brushed
+68 [Snare] Right Muted
+69 [Snare] Flams
+70 [Snare] Rolls
+71 [Snare] Rim Only
+125 [Snare] Center
+126 [Snare] Rimshot
+127 [Snare] Sidestick 
+
+[HH]
+07 [Hats] Trig
+08 [Hats] TipTrig
+09 [Hats] BellTrig
+10 [Hats] Pedal
+11 [Hats] Closed
+12 [Hats] Open 1
+13 [Hats] Open 2
+14 [Hats] Open 3
+15 [Hats] Open 4
+16 [Hats] Alias
+17 [Hats] Open 5
+18 [Hats] Trig
+19 [Hats] TipTrig
+20 [Hats] BellTrig
+21 [Hats] Pedal
+22 [Hats] Closed
+23 [Hats] Footsplash
+24 [Hats] Open 1
+25 [Hats] Open 2
+26 [Hats] Open 3
+42 [Hats]{GM} Closed
+44 [Hats]{GM} Center
+46 [Hats]{GM} Open
+60 [Hats] Open Max
+61 [Hats] Tip Closed
+62 [Hats] Tight
+63 [Hats] Tight Tip
+64 [Hats] Seq Hard
+65 [Hats] Seq Soft
+119 [Hats] Closed Bell
+120 [Hats] Open Bell 1
+121 [Hats] Open Bell 2
+122 [Hats] Closed
+123 [Hats] Open 1
+124 [Hats] Open 3
+
+[RT1]
+01 [Tom 1] Alias
+48 [RackTom 1] Center
+50 [RackTom 1] Alias
+81 [RackTom 1] Alias
+82 [RackTom 1] Rimshot
+
+[RT2]
+02 [Tom 2] Alias
+47 [RackTom 2] Center
+79 [RackTom 2] Alias
+80 [RackTom 2] Rimshot
+
+[RT3]
+03 [Tom 3] Alias
+45 [RackTom 3] Center
+77 [RackTom 3] Alias
+78 [RackTom 3] Rimshot
+
+[RT4]
+04 [Tom 4] Alias
+
+[RT5]
+05 [Tom 5] Alias
+
+[FT1]
+43 [FloorTom 1] Center
+74 [FloorTom 1] Alias
+75 [FloorTom 1] Rimshot
+
+[FT2]
+41 [FloorTom 2] Center
+72 [FloorTom 2] Alias
+73 [FloorTom 2] Rimshot
+
+[Ride]
+51 [Ride] Bow
+53 [Ride] Bell
+59 [Ride] Punch
+84 [Ride 1] Bow
+85 [Ride 1] Bell
+86 [Ride 1] Punch
+87 [Ride 1] Alias
+88 [Ride 1] Alias
+89 [Ride 2] Bow
+90 [Ride 2] Bell
+91 [Ride 2] Punch
+92 [Ride 2] Alias
+93 [Ride 2] Alias
+96 [Ride 4] Bow
+97 [Ride 4] Bell
+98 [Ride 4] Punch
+99 [Ride 4] Alias
+100 [Ride 4] Alias
+101 [Ride 4] Bow
+102 [Ride 4] Bell
+103 [Ride 4] Punch
+104 [Ride 4] Alias
+105 [Ride 4] Alias
+108 [Ride 5] Bow
+109 [Ride 5] Bell
+110 [Ride 5] Punch
+111 [Ride 5] Alias
+112 [Ride 5] Alias
+113 [Ride 5] Center
+114 [Ride 5] Crash A
+115 [Ride 5] Alias
+116 [Ride 5] Alias
+117 [Ride 5] Alias
+
+[Cym]
+27 [Cymbal 1] Crashed
+28 [Cymbal 2] Crashed
+29 [Cymbal 3] Crashed
+30 [Cymbal 4] Crashed
+31 [Cymbal 5] Crashed
+32 [Cymbal 6] Crashed
+
+[China]
+52 [China]{GM} Crashed
+
+[Splash]
+55 [Splash]{GM} Crashed
+
+[Crash]
+49 [Crash A]{GM} Crash A 
+54 [Crash A]{GM} Muted
+57 [Crash B]{GM} Crashed
+58 [Crash B]{GM} Muted
+83 [Crash 1] Muted
+94 [Crash 2] Muted
+95 [Crash 3] Muted
+106 [Crash 4] Muted
+107 [Crash 5] Muted
+118 [Crash 6] Muted
+
+[Cowb.]
+56 [Cowbell] Hit
+76 [Cowbell] Alias
