@@ -1,0 +1,54 @@
+// Addictive Drum basic preset file (midi_velocity_viewer_drums.jsfx).
+
+[Kick]
+36 Kick
+
+[Snare]
+37  Snare Rimshot L
+38  Snare Open Hit L
+39  Snare Rimshot R
+40  Snare Open Hit R
+41  Snare Shallow Rimshot
+42  Snare Side Stick
+43  Snare Shallow Hit
+44  Snare Rim Click
+
+[HH]
+49  HH Closed 1 Pearl
+50  HH Closed 1 Shaft
+51  HH Closed 2 Pearl
+52  HH Closed 2 Shaft
+53  HH Closed Bell
+54  HH Open A
+55  HH Open B
+56  HH Open C
+57  HH Open D
+58  HH Open Bell
+59  HH Pedal Open
+
+[Toms]
+65  Tom 4
+66  Tom 4 Rim
+67  Tom 3
+68  Tom 3 Rim
+69  Tom 2
+70  Tom 2 Rim
+71  Tom 1
+72  Tom 1 Rim
+
+[Ride]
+45  Ride Pearl (double)
+60  Ride Pearl
+61  Ride Bell
+62  Ride Shaft
+63  Ride Choke
+
+[Cymbals]
+46  Cymbal 1 (double)
+77  Cymbal 1
+79  Cymbal 2
+81  Cymbal 3
+
+[Percussion]
+75  Sticks
+47  Cowbell
