@@ -2,6 +2,10 @@
 
 This repository contains Erriez open source JSFX scripts for Reaper.
 
+## Installation
+
+Please follow the instructions on the [Wiki](https://github.com/Erriez/erriez-reaper-jsfx/wiki).
+
 ---
 
 ## MIDI velocity viewer for drums

@@ -4,6 +4,7 @@ author:     Erriez
 license:    MIT
 links:
     Github: https://github.com/Erriez/erriez-reaper-jsfx
+    Wiki:   https://github.com/Erriez/erriez-reaper-jsfx/wiki
     Forum:  http://forum.cockos.com/showthread.php?t=93421
 donation:   https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLMV8JNMJTQ
 screenshot: https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/screenshots/midi_velocity_viewer_drums_gm_01.png
@@ -30,13 +31,13 @@ about:
 
     ## Files and directories Windows 7/8/10
     `C:\Users\<username>\AppData\Roaming\`
-    * `REAPER\Effects\MIDI\midi_velocity_viewer_drums.jsfx`
-    * `REAPER\Data\midi_velocity_viewer_drums\*.txt`
+    * `REAPER\Effects\Erriez\MIDI\erriez_midi_velocity_viewer_drums.jsfx`
+    * `REAPER\Data\erriez_midi_velocity_viewer_drums\*.txt`
 
     ## Files and directories Mac OS X
     `/Users/<username>/Library/Application Support/`
-    * `REAPER/Effects/MIDI/midi_velocity_viewer_drums.jsfx`
-    * `REAPER/Data/midi_velocity_viewer_drums/*.txt`
+    * `REAPER/Effects/Erriez/MIDI/erriez_midi_velocity_viewer_drums.jsfx`
+    * `REAPER/Data/erriez_midi_velocity_viewer_drums/*.txt`
 
     ## Usage
     1. Click on the FX button on a (MIDI) track
