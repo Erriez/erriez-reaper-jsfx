@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<index version="1" commit="f39004fe96d059a9c01f6ba247e1d69568270ebc" name="Erriez">
+<index version="1" commit="91994e01baa72957d03802fac2ebc9f67f814db9" name="Erriez">
   <category name="MIDI">
     <reapack name="erriez_midi_velocity_viewer.jsfx" type="effect" desc="MIDI Velocity Viewer (By Erriez)">
       <metadata>
@@ -59,7 +59,7 @@
 \widowctrl\hyphauto
 
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs36 MIDI Velocity Viewer for Drums and Percussion\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 This JS script for Reaper displays in real time MIDI velocities for drums and percussion.\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 This JSFX script for Reaper displays in real time MIDI velocities for drums and percussion.\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Features\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Display note velocities in real time.\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Use custom or pre-defined drum-map presets.\par}
@@ -81,7 +81,7 @@
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 REAPER/Data/erriez_midi_velocity_viewer_drums/*.txt}\sa180\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Usage\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 1.\tx360\tab Click on the FX button on a (MIDI) track\par}
-{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Browse to this file: {\f1 JS: MIDI\\midi_velocity_viewer_drums}\sa180\par}
+{\pard \ql \f0 \sa0 \li360 \fi-360 2.\tx360\tab Browse to this file: {\f1 JS: MIDI\\erriez_midi_velocity_viewer_drums}\sa180\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 Slider1}: Select the MIDI input channel 1-16 or Any\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 Slider2}: Select the number of grid lines 0..10\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 Slider3}: Select the number of notes per column 1..16\par}
@@ -90,7 +90,12 @@
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Left mouse click to hide/show the minimum/maximum velocities\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab Right mouse click to reset\sa180\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Create custom note mapping\par}
-{\pard \ql \f0 \sa180 \li0 \fi0 TODO\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 Open a file explorer to the REAPER\\Data directory:\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Files and directories Windows 7/8/10: C:\\Users<username>\\AppData\\Roaming\\REAPER\\Data\\erriez_midi_velocity_viewer_drums\\\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Files and directories Mac OS X: /Users//Library/Application Support/REAPER/Data/erriez_midi_velocity_viewer_drums/\par}
+{\pard \ql \f0 \sa180 \li360 \fi-360 \bullet \tx360\tab Create a new .txt file, such as xx-yy Name.txt. xx-yy is used to sort the presets: xx is the plugin type. yy the preset number.\sa180\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 \b \fs28 File format\par}
+{\pard \ql \f0 \sa180 \li0 \fi0 // Commment [Column name] Note number comment [Column name 1] <Note number 1>    [Column name N] <Note number 1>  EOF\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 \b \fs32 Customize font\par}
 {\pard \ql \f0 \sa180 \li0 \fi0 Edit the following variables in the script to change font and font size:\par}
 {\pard \ql \f0 \sa0 \li360 \fi-360 \bullet \tx360\tab {\f1 custom_font} Enable custom font\par}
@@ -109,21 +114,21 @@
       </metadata>
       <version name="1.0" author="Erriez" time="2017-07-04T18:49:50Z">
         <changelog><![CDATA[- 1.0  01 Jul 2017:  Initial version.]]></changelog>
-        <source>https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums.jsfx</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/01-01 GM Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/01-01%20GM%20Basic.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/01-02 GM Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/01-02%20GM%20Extended.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/02-01 Addictive Drums Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/02-01%20Addictive%20Drums%20Basic.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/02-02 Addictive Drums Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/02-02%20Addictive%20Drums%20Extended.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/03-01 Roland TD12 Minimum.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/03-01%20Roland%20TD12%20Minimum.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/03-02 Roland TD12 Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/03-02%20Roland%20TD12%20Basic.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/03-03 Roland TD12 Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/03-03%20Roland%20TD12%20Extended.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/03-04 Roland TD12 Advanced.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/03-04%20Roland%20TD12%20Advanced.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/04-01 TT EZDrummer2 Modern Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/04-01%20TT%20EZDrummer2%20Modern%20Basic.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/04-02 TT EZDrummer2 Modern Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/04-02%20TT%20EZDrummer2%20Modern%20Extended.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/05-01 TT EZDrummer2 Vintage Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/05-01%20TT%20EZDrummer2%20Vintage%20Basic.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/05-02 TT EZDrummer2 Vintage Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/05-02%20TT%20EZDrummer2%20Vintage%20Extended.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/06-01 TT Superior Drummer Avatar Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/06-01%20TT%20Superior%20Drummer%20Avatar%20Basic.txt</source>
-        <source type="data" file="erriez_midi_velocity_viewer_drums/06-02 TT Superior Drummer Avatar Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/f39004fe96d059a9c01f6ba247e1d69568270ebc/MIDI/erriez_midi_velocity_viewer_drums/06-02%20TT%20Superior%20Drummer%20Avatar%20Extended.txt</source>
+        <source>https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums.jsfx</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/01-01 GM Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/01-01%20GM%20Basic.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/01-02 GM Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/01-02%20GM%20Extended.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/02-01 Addictive Drums Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/02-01%20Addictive%20Drums%20Basic.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/02-02 Addictive Drums Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/02-02%20Addictive%20Drums%20Extended.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/03-01 Roland TD12 Minimum.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/03-01%20Roland%20TD12%20Minimum.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/03-02 Roland TD12 Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/03-02%20Roland%20TD12%20Basic.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/03-03 Roland TD12 Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/03-03%20Roland%20TD12%20Extended.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/03-04 Roland TD12 Advanced.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/03-04%20Roland%20TD12%20Advanced.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/04-01 TT EZDrummer2 Modern Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/04-01%20TT%20EZDrummer2%20Modern%20Basic.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/04-02 TT EZDrummer2 Modern Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/04-02%20TT%20EZDrummer2%20Modern%20Extended.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/05-01 TT EZDrummer2 Vintage Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/05-01%20TT%20EZDrummer2%20Vintage%20Basic.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/05-02 TT EZDrummer2 Vintage Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/05-02%20TT%20EZDrummer2%20Vintage%20Extended.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/06-01 TT Superior Drummer Avatar Basic.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/06-01%20TT%20Superior%20Drummer%20Avatar%20Basic.txt</source>
+        <source type="data" file="erriez_midi_velocity_viewer_drums/06-02 TT Superior Drummer Avatar Extended.txt">https://github.com/Erriez/reaper-midi-velocity-viewer/raw/91994e01baa72957d03802fac2ebc9f67f814db9/MIDI/erriez_midi_velocity_viewer_drums/06-02%20TT%20Superior%20Drummer%20Avatar%20Extended.txt</source>
       </version>
     </reapack>
   </category>
