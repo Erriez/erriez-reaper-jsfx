@@ -1,5 +1,5 @@
 desc:       MIDI Velocity Viewer for Drums and Percussion (By Erriez)
-version:    1.0
+version:    1.1
 author:     Erriez
 license:    MIT
 links:
@@ -11,6 +11,7 @@ screenshot: https://raw.githubusercontent.com/Erriez/erriez-reaper-jsfx/master/s
 provides:   [data] erriez_midi_velocity_viewer_drums/*.txt
             erriez_common_gfx.jsfx-inc
 changelog:
+    - 1.1  05 Jul 2017:  Add status bar.
     - 1.0  01 Jul 2017:  Initial version.
 about:
     # MIDI Velocity Viewer for Drums and Percussion
@@ -150,9 +151,6 @@ font_flags = 'b';        // Bold
 //   0: Display note number only
 display_note_name = 1;
 
-// Display dyanmic range between minimum and maximum velocity
-display_dynamic_range = 1;
-
 // Debug
 debug = 0;
 
@@ -183,8 +181,10 @@ NUM_NOTES_OCTAVE = 12;
 // Left mouse button state (LMB)
 lmb_state = 0;
 
-// Show/hide drawing min/max lines
-draw_min_max = 1;
+// Display state min, max and dynamic range
+display_min = 1;
+display_max = 1;
+display_dyn = 1;
 
 // Number of columns
 num_columns = 0;
@@ -373,8 +373,18 @@ function HandleMouseEvents()
     // Capture mouse
     (mouse_cap == 1) && (lmb_state == 0) ?
     (
-        // Left mouse button down: Toggle min/max draw enable
-        (draw_min_max) ? draw_min_max = 0 : draw_min_max = 1;
+        // Handle mouse on status bar
+        ((mouse_y >= status_bar_y) && (mouse_y < chart_h)) ? (
+            (mouse_x < status_bar_sep_w) ? (
+                ClearVelocities();
+            ): (mouse_x < (status_bar_sep_w * 2)) ? (
+                display_min ~= 1;
+            ): (mouse_x < (status_bar_sep_w * 3)) ? (
+                display_max ~= 1;
+            ): (mouse_x < (status_bar_sep_w * 4)) ? (
+                display_dyn ~= 1;
+            );
+        );
 
         // Execute left mouse button only once
         lmb_state = 1;
@@ -384,12 +394,6 @@ function HandleMouseEvents()
     (
         // Left mouse button up
         lmb_state = 0;
-    );
-
-    (mouse_cap == 2) ?
-    (
-        // Right mouse button down: Clear velocities
-        ClearVelocities();
     );
 );
 
@@ -641,10 +645,8 @@ function DrawColumn(column)
     last_velocity = GetVelocityIndex(column, velocity_index[column]);
 
     // Draw dynamic range
-    (draw_min_max) ? (
-        (display_dynamic_range) ? (
-            DrawDynamicRange(column, min_velocity, max_velocity);
-        );
+    (display_dyn) ? (
+        DrawDynamicRange(column, min_velocity, max_velocity);
     );
 
     // Draw velocities
@@ -654,11 +656,13 @@ function DrawColumn(column)
         i += 1;
     );
 
-    (draw_min_max) ? (
-        (velocities_per_note >= 2) ? (
+    (velocities_per_note >= 2) ? (
+        (display_max) ? (
             // Draw max velocity
             DrawMaxVelocity(column, max_velocity);
+        );
 
+        (display_min) ? (
             // Draw min velocity
             (max_velocity != min_velocity) ? (
                 DrawMinVelocity(column, min_velocity);
@@ -706,6 +710,58 @@ function DrawColumns()
     );
 );
 
+function DrawStatusBarText(str, text_w, state)
+(
+    (state == 0) ? (
+        SetColorGray();
+        DrawFilledRect(status_bar_text_x, status_bar_y, text_w - 1, gfx_texth);
+        SetColorBlack();
+    ): (state == 1) ? (
+        SetColorBlue();
+        DrawFilledRect(status_bar_text_x, status_bar_y, text_w - 1, gfx_texth);
+        SetColorWhite();
+    ): (state == 2) ? (
+        SetColorBlack();
+        DrawFilledRect(status_bar_text_x, status_bar_y, text_w - 1, gfx_texth);
+        SetColorWhite();
+    ): (state == 3) ? (
+        SetColorGray();
+        DrawFilledRect(status_bar_text_x, status_bar_y, text_w - 1, gfx_texth);
+        SetColorWhite();
+    );
+
+    DrawTextCenter(status_bar_text_x, status_bar_y, text_w, str);
+
+    status_bar_text_x += text_w;
+);
+
+function DrawStatusBar()
+(
+    // Set default Windows font
+    gfx_setfont(custom_font, "Segoe", 18, "");
+    SetColor(0.8, 0.8, 0.8);
+    DrawFilledRect(status_bar_x, status_bar_y, status_bar_w, status_bar_h);
+
+    status_bar_text_x = 0;
+    DrawStatusBarText("Clear", 50, 2);
+    DrawStatusBarText("Min", 50, display_min);
+    DrawStatusBarText("Max", 50, display_max);
+    DrawStatusBarText("Dyn", 50, display_dyn);
+    DrawStatusBarText("", 50, 4);
+
+    /* TODO: Move channel, grid, bars and font sliders and move to status bar
+    DrawStatusBarText("Ch: ANY", 80, 3);
+    DrawStatusBarText("Grid: 16", 80, 3);
+    DrawStatusBarText("Bars: 10", 80, 3);
+    DrawStatusBarText("Font: 18", 80, 3);*/
+
+    SetColorGreen();
+    DrawLineH(status_bar_x, status_bar_y, status_bar_w);
+
+    // Restore custom font
+    gfx_setfont(custom_font, font_type, font_size, font_flags);
+);
+
 //------------------------------------------------------------------------------
 // Process graphics entry point: Tick every 1/25 sec
 //------------------------------------------------------------------------------
@@ -721,9 +777,15 @@ chart_y = 0;
 chart_w = gfx_w - 0;
 chart_h = gfx_h - 0;
 
+status_bar_w = chart_w;
+status_bar_h = gfx_texth;
+status_bar_x = chart_x;
+status_bar_y = chart_y + chart_h - status_bar_h;
+status_bar_sep_w = 50;
+
 num_labels = 3;
 legenda_w = column_x - chart_x;
-legenda_h = font_size * num_labels;
+legenda_h = (font_size * num_labels) + status_bar_h;
 legenda_x = chart_x;
 legenda_y = chart_y + chart_h - legenda_h;
 
@@ -744,6 +806,7 @@ DrawChartOutline();
 DrawLegenda();
 DrawColumns();
 DrawGridLines();
+DrawStatusBar();
 
 (debug) ? (
     end_time = time_precise();
