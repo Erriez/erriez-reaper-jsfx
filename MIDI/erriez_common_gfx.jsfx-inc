@@ -1,0 +1,198 @@
+desc:       Common JSFX graphics library (By Erriez)
+
+//------------------------------------------------------------------------------
+// MIT License
+//
+// Copyright (c) 2017 Erriez
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//------------------------------------------------------------------------------
+
+@init
+
+function InitializeGraphics()
+(
+    // Set draw mode
+    gfx_a = 1;
+    gfx_mode = 0;
+
+    // Set font
+    gfx_setfont(custom_font, font_type, font_size, font_flags);
+);
+
+function NumberToString(number)
+(
+    // Convert a number to a tempory string
+    str = #;
+    sprintf(str, "%d", number);
+
+    // Return string
+    str;
+);
+
+function GetNoteString(note_number)
+(
+    note_octave = (note_number / NUM_NOTES_OCTAVE) - 1;
+    note_name = note_names[note_number % NUM_NOTES_OCTAVE];
+
+    str = #;
+    sprintf(str, "%d %s%d", note_number, note_name, note_octave);
+
+    // Return string;
+    str;
+);
+
+function GetStringWidth(str)
+(
+    // Get font dimensions of a string
+    gfx_measurestr(str, w, h);
+
+    // Return string width in pixels
+    w;
+);
+
+function GetStringHeight(str)
+(
+    gfx_measurestr(str, w, h);
+
+    // Return string height in pixels
+    h;
+);
+
+function GetNumberWidth(number)
+(
+    // Convert number to string and return string width
+    w = GetStringWidth(NumberToString(number));
+);
+
+function SetColor(r, g, b)
+(
+    gfx_r = r; gfx_g = g; gfx_b = b;
+);
+
+function SetColorBlack()
+(
+    gfx_r = 0; gfx_g = 0; gfx_b = 0;
+);
+
+function SetColorRed()
+(
+    gfx_r = 1; gfx_g = 0; gfx_b = 0;
+);
+
+function SetColorGreen()
+(
+    gfx_r = 0; gfx_g = 1; gfx_b = 0;
+);
+
+function SetColorBlue()
+(
+    gfx_r = 0; gfx_g = 0; gfx_b = 1;
+);
+
+function SetColorYellow()
+(
+    gfx_r = 1; gfx_g = 1; gfx_b = 0;
+);
+
+function SetColorPurple()
+(
+    gfx_r = 1; gfx_g = 0; gfx_b = 1;
+);
+
+function SetColorGray()
+(
+    gfx_r = 0.5; gfx_g = 0.5; gfx_b = 0.5;
+);
+
+function SetColorWhite()
+(
+    gfx_r = 1; gfx_g = 1; gfx_b = 1;
+);
+
+function DrawText(x, y, text)
+(
+    gfx_x = x; gfx_y = y;
+    gfx_drawstr(text);
+);
+
+function DrawTextCenter(x, y, w, text)
+(
+    x = x + (w - GetStringWidth(text)) / 2;
+    DrawText(x, y, text);
+);
+
+function DrawTextRight(x, y, w, text)
+(
+    x += w - GetStringWidth(text);
+    DrawText(x, y, text);
+);
+
+function DrawNumber(x, y, number)
+(
+    gfx_x = x; gfx_y = y;
+    gfx_drawnumber(number, 0);
+);
+
+function DrawNumberCenter(x, y, w, number)
+(
+    DrawTextCenter(x, y, w, NumberToString(number));
+);
+
+function DrawNumberRight(x, y, w, number)
+(
+    str = #;
+    sprintf(str, "%d", number);
+    DrawTextRight(x, y, w, str);
+);
+
+function DrawLineH(x, y, l)
+(
+    gfx_line(x, y, x + l, y);
+);
+
+function DrawLineV(x, y, l)
+(
+    gfx_line(x, y, x, y + l);
+);
+
+function DrawDottedLine(x, y, w)
+(
+    gfx_x = x; gfx_y = y;
+    while (
+        gfx_setpixel(gfx_r, gfx_g, gfx_b);
+        gfx_x += 10;
+        gfx_x < (x + w);
+    );
+);
+
+function DrawRect(x, y, w, h)
+(
+    gfx_x = x; gfx_y = y;
+    gfx_lineto(x+w, y);
+    gfx_lineto(x+w, y+h);
+    gfx_lineto(x, y+h);
+    gfx_lineto(x, y);
+);
+
+function DrawFilledRect(x, y, w, h)
+(
+    gfx_x = x; gfx_y = y;
+    gfx_rectto(x+w, y+h);
+);
