@@ -13,7 +13,7 @@ changelog:
     - 1.0  01 Jul 2017:  Initial version.
 about:
     # MIDI Velocity Viewer for Drums and Percussion
-    This JS script for Reaper displays in real time MIDI velocities for drums
+    This JSFX script for Reaper displays in real time MIDI velocities for drums
     and percussion.
 
     ## Features
@@ -41,7 +41,7 @@ about:
 
     ## Usage
     1. Click on the FX button on a (MIDI) track
-    2. Browse to this file: `JS: MIDI\midi_velocity_viewer_drums`
+    2. Browse to this file: `JS: MIDI\erriez_midi_velocity_viewer_drums`
 
     * `Slider1`: Select the MIDI input channel 1-16 or Any
     * `Slider2`: Select the number of grid lines 0..10
@@ -53,7 +53,23 @@ about:
     - Right mouse click to reset
 
     ## Create custom note mapping
-    TODO
+    Open a file explorer to the REAPER\Data directory:
+    * Files and directories Windows 7/8/10:
+        C:\Users\<username>\AppData\Roaming\REAPER\Data\erriez_midi_velocity_viewer_drums\
+    * Files and directories Mac OS X:
+        /Users/<username>/Library/Application Support/REAPER/Data/erriez_midi_velocity_viewer_drums/
+
+    * Create a new .txt file, such as xx-yy Name.txt. xx-yy is used to sort the
+      presets: xx is the plugin type. yy the preset number.
+
+    ### File format
+    // Commment [Column name] Note number comment
+    [Column name 1]
+    <Note number 1> <Note description>
+    <Note number N> <Note description>
+    [Column name N]
+    <Note number 1> <Note description>
+    EOF
 
     ## Customize font
     Edit the following variables in the script to change font and font size:
