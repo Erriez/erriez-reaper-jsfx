@@ -1,0 +1,80 @@
+// Addictive Drum extended preset file (midi_velocity_viewer_drums.jsfx).
+
+// Re-name Flex Hit/Percussion to whatever is assigned (IE: Flex Hit 1 = Cowbell, Flex Hit 2 = Tambourine, etc) 
+
+[Kick]
+36 Kick
+
+[Snare]
+37  Snare Rimshot L
+38  Snare Open Hit L
+39  Snare Rimshot R
+40  Snare Open Hit R
+41  Snare Shallow Rimshot
+42  Snare Side Stick
+43  Snare Shallow Hit
+44  Snare Rim Click
+
+[HH]
+49  HH Closed 1 Tip
+50  HH Closed 1 Shaft
+51  HH Closed 2 Tip
+52  HH Closed 2 Shaft
+53  HH Closed Bell
+54  HH Open A
+55  HH Open B
+56  HH Open C
+57  HH Open D
+58  HH Open Bell
+59  HH Foot Splash
+
+[T1]
+71  Tom 1
+72  Tom 1 Rim
+
+[T2]
+69  Tom 2
+70  Tom 2 Rim
+
+[T3]
+67  Tom 3
+68  Tom 3 Rim
+
+[T4]
+65  Tom 4
+66  Tom 4 Rim
+
+[Ride]
+45  Ride Tip (double)
+60  Ride Tip
+61  Ride Bell
+62  Ride Shaft
+63  Ride Choke
+
+[Cym1]
+46  Cymbal 1 (double)
+77  Cymbal 1
+78  Cymbal 1 Choke
+
+[Cym2]
+79  Cymbal 2
+80  Cymbal 2 Choke
+
+[Cym3]
+81  Cymbal 3
+82  Cymbal 3 Choke
+
+[Perc.]
+103 Flex 3 Hit D
+102 Flex 3 Hit C
+101 Flex 3 Hit B
+100 Flex 3 Hit A
+99  Flex 2 Hit D
+98  Flex 2 Hit C
+97  Flex 2 Hit B
+96  Flex 2 Hit A
+76  Flex1 Hit D
+75  Sticks
+74  Flex 1 Hit C
+73  Flex 1 Hit B
+47  Flex 1 Hit A
